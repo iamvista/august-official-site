@@ -1,0 +1,86 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead title={`成功案例 - ${SITE_TITLE}`} description="Dr. August 的服務案例與學員見證" />
+		<style>
+			main {
+				width: 960px;
+                max-width: calc(100% - 2em);
+                margin: auto;
+                padding: 3em 1em;
+			}
+            .case-study {
+                margin-bottom: 4rem;
+                padding-bottom: 2rem;
+                border-bottom: 1px solid var(--gray-light);
+            }
+            .case-study:last-child { border-bottom: none; }
+            .case-study h2 { color: var(--accent); margin-bottom: 1rem; }
+            .result-box {
+                background: var(--gray-light);
+                padding: 1.5rem;
+                border-left: 5px solid var(--accent);
+                margin: 1.5rem 0;
+            }
+            .result-box h3 { margin-top: 0; font-size: 1.2rem; }
+            .testimonial {
+                font-style: italic;
+                color: var(--gray-dark);
+                padding: 1rem;
+                border: 1px solid #ddd;
+                margin-top: 1rem;
+            }
+            .client-info {
+                font-weight: bold;
+                margin-top: 0.5rem;
+                text-align: right;
+            }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+            <h1 style="text-align: center; margin-bottom: 3rem;">成功案例與見證</h1>
+            
+            <article class="case-study">
+                <h2>案例一：科技新創團隊的 AI 自動化轉型</h2>
+                <p><strong>背景：</strong>一家擁有 20 人的 SaaS 新創，行銷團隊每天花費大量時間撰寫社群貼文與電子報，導致無法專注於核心策略。</p>
+                <p><strong>解決方案：</strong>導入 ChatGPT + Zapier 自動化工作流。建立專屬的「品牌語氣資料庫」，讓 AI 自動生成符合品牌調性的初稿。</p>
+                <div class="result-box">
+                    <h3>成果</h3>
+                    <ul>
+                        <li>內容產出效率提升 <strong>300%</strong></li>
+                        <li>每週節省 <strong>15 小時</strong> 人力成本</li>
+                        <li>社群互動率提升 20% (因內容品質更穩定)</li>
+                    </ul>
+                </div>
+                <div class="testimonial">
+                    "Dr. August 不只是教我們怎麼用工具，更幫我們重新梳理了工作流程。現在團隊終於可以把時間花在真正重要的事情上了！"
+                    <div class="client-info">— Alpha, CEO of TechStart</div>
+                </div>
+            </article>
+
+            <article class="case-study">
+                <h2>案例二：自由工作者的個人品牌打造</h2>
+                <p><strong>背景：</strong>一位資深文案想要轉型為個人品牌教練，但苦於產出速度慢，無法維持穩定的內容更新。</p>
+                <p><strong>解決方案：</strong>透過「寫作協作系統」，利用 AI 進行選題發想、大綱架構與素材整理。</p>
+                <div class="result-box">
+                    <h3>成果</h3>
+                    <ul>
+                        <li>從每週 1 篇文章增加到每週 <strong>3 篇深度文章 + 5 篇短貼文</strong></li>
+                        <li>訂閱人數在 3 個月內成長 <strong>50%</strong></li>
+                    </ul>
+                </div>
+            </article>
+
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,91 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead title={`專業服務 - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 960px;
+                max-width: calc(100% - 2em);
+                margin: auto;
+                padding: 3em 1em;
+			}
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+            .service-card {
+                border: 1px solid var(--gray-light);
+                padding: 2rem;
+                transition: transform 0.2s, box-shadow 0.2s;
+                background: white;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            }
+            .service-card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--box-shadow);
+            }
+            .service-card h2 {
+                color: var(--accent);
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .service-card p {
+                margin-bottom: 1.5rem;
+                color: rgb(var(--gray-dark));
+            }
+            .learn-more {
+                display: inline-block;
+                color: var(--accent);
+                text-decoration: none;
+                font-weight: bold;
+                border-bottom: 2px solid transparent;
+            }
+            .learn-more:hover {
+                border-bottom-color: var(--accent);
+            }
+            .page-title {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            .page-title h1 { margin-bottom: 0.5rem; }
+            .page-title p { color: rgb(var(--gray)); font-size: 1.2rem; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+            <div class="page-title">
+                <h1>專業服務</h1>
+                <p>協助企業與個人運用 AI 提升競爭力</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h2>顧問諮詢</h2>
+                    <p>針對企業或個人需求，量身打造 AI 導入策略與自動化工作流，解決真實痛點。</p>
+                    <a href="/services/consulting" class="learn-more">了解更多 &rarr;</a>
+                </div>
+                <div class="service-card">
+                    <h2>企業內訓 / 演講</h2>
+                    <p>從 AI 趨勢分析到實戰 Prompt 工程，透過工作坊形式帶領團隊掌握新時代技能。</p>
+                    <a href="mailto:contact@august.tw" class="learn-more">預約洽談 &rarr;</a>
+                </div>
+                <div class="service-card">
+                    <h2>寫作教練</h2>
+                    <p>結合 AI 工具與專業寫作心法，協助建立個人品牌，產出高品質內容。</p>
+                    <a href="mailto:contact@august.tw" class="learn-more">預約洽談 &rarr;</a>
+                </div>
+            </div>
+		</main>
+		<Footer />
+	</body>
+</html>

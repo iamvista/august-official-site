@@ -1,0 +1,140 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead title={`AI 賦能顧問服務 - ${SITE_TITLE}`} description="協助企業與個人導入 AI 工作流，提升生產力產值。" />
+		<style>
+            .lp-hero {
+                background: var(--gray-light);
+                color: var(--black);
+                padding: 6rem 1rem;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
+            .lp-hero h1 { color: var(--accent-dark); margin-bottom: 1.5rem; font-size: 3rem; }
+            .lp-hero p { color: var(--gray-dark); font-size: 1.4rem; max-width: 800px; margin: 0 auto 2rem; }
+            
+            .cta-btn {
+                display: inline-block;
+                padding: 1rem 3rem;
+                background: var(--accent);
+                color: white;
+                font-weight: bold;
+                text-decoration: none;
+                transition: all 0.2s;
+                border: 2px solid var(--accent);
+            }
+            .cta-btn:hover { 
+                background: white; 
+                color: var(--accent);
+                transform: translateY(-2px);
+            }
+
+            .section { padding: 5rem 1rem; max-width: 960px; margin: 0 auto; }
+            
+            .feature-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+            .feature-card {
+                padding: 2rem;
+                border: 1px solid #ccc;
+                border-top: 4px solid var(--accent);
+                background: white;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            }
+            .feature-card h3 { color: var(--accent-dark); margin-top: 0; }
+
+            .workflow-step {
+                display: flex;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+                align-items: flex-start;
+            }
+            .step-number {
+                background: var(--accent);
+                color: white;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                flex-shrink: 0;
+            }
+            .section-title {
+                text-align: center;
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+            }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main style="padding: 0; width: 100%; max-width: 100%;">
+            <section class="lp-hero">
+                <h1>AI 不會取代你，<br/>但善用 AI 的人會</h1>
+                <p>別再把 ChatGPT 當成單純的聊天機器人。我協助你建立完整的「AI 協作系統」，讓 AI 成為你最強的數位分身。</p>
+                <a href="https://cal.com/vista" target="_blank" class="cta-btn">預約企業 / 個人診斷</a>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">三大核心服務</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>🔍 AI 工作流診斷</h3>
+                        <p>深入拆解你的工作流程 (SOP)，找出最適合 AI 介入的自動化斷點。不為了用而用，而是為了解決效率瓶頸。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🛠 提示工程 (Prompt) 優化</h3>
+                        <p>建立專屬於你的 Prompt Library。從簡單的指令到複雜的 Chain-of-Thought (思維鏈)，讓 AI 產出專家級的品質。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>🏢 企業 AI 導入顧問</h3>
+                        <p>協助組織建立內部 AI 使用規範，舉辦實戰工作坊，讓團隊從抗拒 AI 轉變為擁抱 AI。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" style="background:var(--gray-light);">
+                <h2 class="section-title">導入流程</h2>
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>需求訪談與盤點</h3>
+                        <p>了解目前的痛點、使用的工具堆疊 (Tech Stack)，以及希望達成的目標。</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>解決方案設計</h3>
+                        <p>規劃適合的 AI 工具組合 (ChatGPT, Claude, Notion AI, Zapier 等) 與自動化流程。</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>培訓與落地實作</h3>
+                        <p>透過工作坊形式帶領團隊實操作業，並建立檢核機制，確保新流程能真正落地。</p>
+                    </div>
+                </div>
+            </section>
+
+             <section class="section" style="text-align: center;">
+                <h2 class="section-title">準備好升級你的生產力了嗎？</h2>
+                <p style="margin-bottom: 2rem; font-size: 1.2rem;">立即預約 30 分鐘免費諮詢，讓我們聊聊你的需求。</p>
+                <a href="https://cal.com/vista" target="_blank" class="cta-btn">立即預約諮詢</a>
+            </section>
+		</main>
+		<Footer />
+	</body>
+</html>
