@@ -1,0 +1,146 @@
+---
+interface Video {
+  id: string;
+  title: string;
+  thumbnail?: string;
+}
+
+interface Props {
+  title?: string;
+  videos?: Video[];
+  youtubeChannel?: string;
+}
+
+const {
+  title = "阿杰博士的代謝教室",
+  videos = [
+    { id: "VIDEO_ID_1", title: "什麼是代謝靈活性？" },
+    { id: "VIDEO_ID_2", title: "168 斷食入門指南" },
+    { id: "VIDEO_ID_3", title: "Zone 2 超慢跑完整教學" },
+  ],
+  youtubeChannel = "https://www.youtube.com/@AugustLin123"
+} = Astro.props;
+---
+
+<section class="video-gallery">
+  <h2 class="section-title">{title}</h2>
+  <div class="video-grid">
+    {videos.map((video) => (
+      <a
+        href={`https://www.youtube.com/watch?v=${video.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="video-card"
+      >
+        <div class="video-thumbnail">
+          <img
+            src={video.thumbnail || `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+            alt={video.title}
+            loading="lazy"
+          />
+          <div class="play-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+        <h3 class="video-title">{video.title}</h3>
+      </a>
+    ))}
+  </div>
+  <div class="channel-link">
+    <a href={youtubeChannel} target="_blank" rel="noopener noreferrer">
+      觀看更多影片 →
+    </a>
+  </div>
+</section>
+
+<style>
+  .video-gallery {
+    padding: 4rem 1rem;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    text-align: center;
+    color: var(--accent-dark);
+    margin-bottom: 2rem;
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .video-card {
+    text-decoration: none;
+    color: inherit;
+    transition: transform var(--transition-fast);
+  }
+
+  .video-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .video-thumbnail {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background: rgb(var(--gray-light));
+  }
+
+  .video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-medium);
+  }
+
+  .video-card:hover .video-thumbnail img {
+    transform: scale(1.05);
+  }
+
+  .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: background var(--transition-fast);
+  }
+
+  .video-card:hover .play-icon {
+    background: var(--accent);
+  }
+
+  .video-title {
+    font-size: 1rem;
+    margin-top: 0.75rem;
+    color: rgb(var(--black));
+  }
+
+  .channel-link {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .channel-link a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .channel-link a:hover {
+    text-decoration: underline;
+  }
+</style>
