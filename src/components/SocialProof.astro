@@ -1,0 +1,83 @@
+---
+interface Props {
+  headline?: string;
+}
+
+const { headline = "已協助 50+ 位學員改善代謝健康" } = Astro.props;
+
+const stats = [
+  { value: "8.5", unit: "kg", label: "平均減重", note: "90天內" },
+  { value: "85", unit: "%", label: "脂肪肝改善率", note: "3個月追蹤" },
+  { value: "98", unit: "%", label: "學員滿意度", note: "問卷調查" },
+];
+---
+
+<section class="social-proof">
+  <p class="headline">{headline}</p>
+  <div class="stats-grid">
+    {stats.map((stat) => (
+      <div class="stat-card">
+        <div class="stat-value">
+          {stat.value}<span class="stat-unit">{stat.unit}</span>
+        </div>
+        <div class="stat-label">{stat.label}</div>
+        <div class="stat-note">{stat.note}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .social-proof {
+    background: var(--bg-science);
+    padding: 3rem 1rem;
+    text-align: center;
+    border-top: 1px solid rgba(var(--gray-light), 1);
+    border-bottom: 1px solid rgba(var(--gray-light), 1);
+  }
+
+  .headline {
+    font-size: 1.1rem;
+    color: rgb(var(--gray));
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .stat-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--science-blue);
+    line-height: 1;
+  }
+
+  .stat-unit {
+    font-size: 1.5rem;
+    margin-left: 0.1em;
+  }
+
+  .stat-label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgb(var(--black));
+    margin-top: 0.5rem;
+  }
+
+  .stat-note {
+    font-size: 0.85rem;
+    color: rgb(var(--gray));
+    margin-top: 0.25rem;
+  }
+</style>
