@@ -131,102 +131,115 @@ import { SITE_TITLE } from '../../consts';
 
 		<style>
 			.quiz-page {
-				min-height: 70vh;
+				min-height: 80vh;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				padding: 2rem 1rem;
+				padding: 3rem 1.5rem;
+				background: linear-gradient(180deg, var(--bg-mint) 0%, var(--bg-cream) 100%);
 			}
 
 			.quiz-container {
-				max-width: 600px;
+				max-width: 580px;
 				width: 100%;
 			}
 
 			.quiz-header {
 				text-align: center;
-				margin-bottom: 2rem;
+				margin-bottom: 2.5rem;
 			}
 
 			.quiz-header h1 {
-				color: var(--accent-dark);
-				margin-bottom: 0.5rem;
+				color: rgb(var(--black));
+				margin-bottom: 0.75rem;
+				font-size: 1.75rem;
 			}
 
 			.quiz-header p {
 				color: rgb(var(--gray));
+				font-size: 1rem;
 			}
 
 			.question-slide {
 				background: white;
-				padding: 2rem;
-				border-radius: var(--border-radius);
-				box-shadow: var(--box-shadow);
+				padding: 2.5rem 2rem;
+				border-radius: var(--border-radius-lg);
+				box-shadow: var(--box-shadow-md);
 			}
 
 			.progress-bar {
-				height: 6px;
-				background: rgb(var(--gray-light));
-				border-radius: 3px;
-				margin-bottom: 1.5rem;
+				height: 8px;
+				background: var(--bg-mint);
+				border-radius: 4px;
+				margin-bottom: 2rem;
 				overflow: hidden;
 			}
 
 			.progress {
 				height: 100%;
-				background: var(--health-green);
-				transition: width 0.3s ease;
+				background: var(--accent-gradient);
+				border-radius: 4px;
+				transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 			}
 
 			.question-number {
-				font-size: 0.85rem;
-				color: rgb(var(--gray));
+				font-size: 0.8rem;
+				color: var(--accent);
 				margin-bottom: 0.5rem;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
 			}
 
 			.question-slide h2 {
-				font-size: 1.4rem;
+				font-size: 1.35rem;
 				color: rgb(var(--black));
-				margin-bottom: 1.5rem;
+				margin-bottom: 1.75rem;
+				font-weight: 600;
+				line-height: 1.4;
 			}
 
 			.options {
 				display: flex;
 				flex-direction: column;
-				gap: 0.75rem;
+				gap: 0.875rem;
 			}
 
 			.option-btn {
-				padding: 1rem 1.5rem;
-				border: 2px solid rgb(var(--gray-light));
+				padding: 1.1rem 1.5rem;
+				border: 1.5px solid rgba(0, 0, 0, 0.08);
 				background: white;
 				border-radius: var(--border-radius);
-				font-size: 1rem;
+				font-size: 0.95rem;
 				cursor: pointer;
 				transition: all var(--transition-fast);
 				text-align: left;
+				font-weight: 500;
+				color: rgb(var(--gray-dark));
 			}
 
 			.option-btn:hover {
 				border-color: var(--accent);
-				background: var(--bg-warm);
+				background: var(--bg-mint);
+				color: var(--accent);
 			}
 
 			.option-btn.selected {
 				border-color: var(--accent);
 				background: var(--accent);
 				color: white;
+				box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
 			}
 
 			.multi-select .option-btn.selected {
-				background: var(--health-green);
-				border-color: var(--health-green);
+				background: var(--accent);
+				border-color: var(--accent);
 			}
 
 			.next-btn {
-				margin-top: 1.5rem;
-				padding: 1rem 2rem;
-				background: var(--accent);
+				margin-top: 2rem;
+				padding: 1.1rem 2rem;
+				background: var(--accent-gradient);
 				color: white;
 				border: none;
 				border-radius: var(--border-radius);
@@ -235,29 +248,32 @@ import { SITE_TITLE } from '../../consts';
 				cursor: pointer;
 				width: 100%;
 				transition: all var(--transition-fast);
+				box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
 			}
 
 			.next-btn:hover {
-				background: var(--accent-dark);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
 			}
 
 			/* Email capture */
 			.email-capture {
 				background: white;
-				padding: 2rem;
-				border-radius: var(--border-radius);
-				box-shadow: var(--box-shadow);
+				padding: 3rem 2rem;
+				border-radius: var(--border-radius-lg);
+				box-shadow: var(--box-shadow-md);
 				text-align: center;
 			}
 
 			.email-capture h2 {
-				color: var(--health-green);
+				color: var(--accent);
 				margin-bottom: 0.5rem;
+				font-size: 1.5rem;
 			}
 
 			.email-capture p {
 				color: rgb(var(--gray));
-				margin-bottom: 1.5rem;
+				margin-bottom: 2rem;
 			}
 
 			#email-form {
@@ -267,20 +283,22 @@ import { SITE_TITLE } from '../../consts';
 			}
 
 			#email-input {
-				padding: 1rem;
-				border: 2px solid rgb(var(--gray-light));
+				padding: 1.1rem 1.25rem;
+				border: 1.5px solid rgba(0, 0, 0, 0.08);
 				border-radius: var(--border-radius);
 				font-size: 1rem;
+				transition: all var(--transition-fast);
 			}
 
 			#email-input:focus {
 				outline: none;
 				border-color: var(--accent);
+				box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
 			}
 
 			.submit-btn {
-				padding: 1rem;
-				background: var(--accent);
+				padding: 1.1rem;
+				background: var(--accent-gradient);
 				color: white;
 				border: none;
 				border-radius: var(--border-radius);
@@ -288,16 +306,18 @@ import { SITE_TITLE } from '../../consts';
 				font-weight: 600;
 				cursor: pointer;
 				transition: all var(--transition-fast);
+				box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
 			}
 
 			.submit-btn:hover {
-				background: var(--accent-dark);
+				transform: translateY(-2px);
+				box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
 			}
 
 			.privacy-note {
 				font-size: 0.8rem;
 				color: rgb(var(--gray));
-				margin-top: 1rem;
+				margin-top: 1.25rem;
 				margin-bottom: 0;
 			}
 		</style>

@@ -16,10 +16,17 @@ const {
 
 {variant === 'banner' ? (
   <section class="quiz-cta-banner">
+    <div class="banner-bg"></div>
     <div class="banner-content">
+      <div class="banner-badge">免費健康評估</div>
       <h2>{title}</h2>
       <p>{description}</p>
-      <a href="/quiz" class="cta-btn primary">{buttonText}</a>
+      <a href="/quiz" class="cta-btn primary">
+        <span>{buttonText}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+        </svg>
+      </a>
     </div>
   </section>
 ) : (
@@ -33,43 +40,90 @@ const {
 <style>
   /* Banner variant */
   .quiz-cta-banner {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    padding: 4rem 1rem;
+    position: relative;
+    background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #14b8a6 100%);
+    padding: 5rem 1.5rem;
     text-align: center;
+    overflow: hidden;
+  }
+
+  .banner-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
   }
 
   .banner-content {
+    position: relative;
     max-width: 600px;
     margin: 0 auto;
+    z-index: 1;
+  }
+
+  .banner-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-xl);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   .banner-content h2 {
     color: white;
     font-size: 2rem;
     margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .banner-content h2 {
+      font-size: 2.25rem;
+    }
   }
 
   .banner-content p {
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     margin-bottom: 2rem;
+    line-height: 1.6;
   }
 
   .quiz-cta-banner .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
     background: white;
-    color: var(--accent-dark);
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
+    color: var(--accent);
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
     text-decoration: none;
-    display: inline-block;
     border-radius: var(--border-radius);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: all var(--transition-fast);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
   }
 
   .quiz-cta-banner .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  .quiz-cta-banner .cta-btn svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .quiz-cta-banner .cta-btn:hover svg {
+    transform: translateX(4px);
   }
 
   /* Inline variants */
@@ -78,33 +132,36 @@ const {
   }
 
   .quiz-cta-inline .cta-btn {
-    padding: 0.8rem 1.5rem;
-    font-weight: 700;
+    padding: 0.9rem 1.75rem;
+    font-weight: 600;
     text-decoration: none;
     display: inline-block;
-    border: 2px solid var(--accent);
+    border-radius: var(--border-radius);
     transition: all var(--transition-fast);
+    font-size: 0.95rem;
   }
 
   .quiz-cta-inline .cta-btn.primary {
-    background: var(--accent);
+    background: var(--accent-gradient);
     color: white;
+    border: none;
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
   }
 
   .quiz-cta-inline .cta-btn.primary:hover {
-    background: var(--accent-dark);
-    border-color: var(--accent-dark);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
   }
 
   .quiz-cta-inline .cta-btn.secondary {
-    background: transparent;
+    background: white;
     color: var(--accent);
+    border: 1.5px solid rgba(5, 150, 105, 0.2);
   }
 
   .quiz-cta-inline .cta-btn.secondary:hover {
-    background: var(--accent);
-    color: white;
+    background: var(--bg-mint);
+    border-color: var(--accent);
     transform: translateY(-2px);
   }
 </style>

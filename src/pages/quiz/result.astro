@@ -81,92 +81,100 @@ import { SITE_TITLE } from '../../consts';
 
 		<style>
 			.result-page {
-				padding: 2rem 1rem;
+				padding: 3rem 1.5rem;
+				background: linear-gradient(180deg, var(--bg-mint) 0%, var(--bg-cream) 100%);
+				min-height: 100vh;
 			}
 
 			.result-container {
-				max-width: 700px;
+				max-width: 640px;
 				margin: 0 auto;
 			}
 
 			.loading {
 				text-align: center;
-				padding: 4rem 2rem;
+				padding: 5rem 2rem;
+				color: rgb(var(--gray));
 			}
 
 			.result-card {
 				background: white;
 				padding: 3rem 2rem;
-				border-radius: var(--border-radius);
-				box-shadow: var(--box-shadow);
+				border-radius: var(--border-radius-lg);
+				box-shadow: var(--box-shadow-md);
 				text-align: center;
 				margin-bottom: 2rem;
 			}
 
 			.result-card h1 {
-				color: rgb(var(--gray));
-				font-size: 1.2rem;
+				color: var(--accent);
+				font-size: 0.85rem;
 				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				margin-bottom: 1rem;
+				letter-spacing: 0.12em;
+				margin-bottom: 1.5rem;
+				font-weight: 600;
 			}
 
 			.age-display {
-				margin-bottom: 0.5rem;
+				margin-bottom: 0.75rem;
 			}
 
 			.metabolic-age {
-				font-size: 5rem;
+				font-size: 4.5rem;
 				font-weight: 700;
 				line-height: 1;
+				letter-spacing: -0.03em;
 			}
 
 			.age-unit {
-				font-size: 2rem;
+				font-size: 1.75rem;
 				color: rgb(var(--gray));
+				font-weight: 500;
 			}
 
 			.actual-age {
 				color: rgb(var(--gray));
-				margin-bottom: 1rem;
+				margin-bottom: 1.25rem;
+				font-size: 0.95rem;
 			}
 
 			.age-diff {
-				font-size: 1.1rem;
+				font-size: 0.95rem;
 				font-weight: 600;
 				padding: 0.75rem 1.5rem;
-				border-radius: var(--border-radius);
+				border-radius: var(--border-radius-xl);
 				display: inline-block;
 			}
 
 			.age-diff.warning {
 				background: #fef3c7;
-				color: #92400e;
+				color: #b45309;
 			}
 
 			.age-diff.danger {
 				background: #fee2e2;
-				color: #991b1b;
+				color: #b91c1c;
 			}
 
 			.age-diff.good {
-				background: #dcfce7;
-				color: #166534;
+				background: var(--bg-mint);
+				color: var(--accent);
 			}
 
 			/* Risk section */
 			.risk-section {
 				background: white;
 				padding: 2rem;
-				border-radius: var(--border-radius);
+				border-radius: var(--border-radius-lg);
 				box-shadow: var(--box-shadow);
 				margin-bottom: 2rem;
 			}
 
 			.risk-section h2 {
-				font-size: 1.2rem;
+				font-size: 1.1rem;
 				color: rgb(var(--black));
-				margin-bottom: 1rem;
+				margin-bottom: 1.25rem;
+				font-weight: 600;
 			}
 
 			.risk-list {
@@ -177,8 +185,21 @@ import { SITE_TITLE } from '../../consts';
 
 			.risk-list li {
 				padding: 0.75rem 0;
-				border-bottom: 1px solid rgb(var(--gray-light));
-				color: rgb(var(--gray-dark));
+				border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+				color: rgb(var(--gray));
+				font-size: 0.95rem;
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+
+			.risk-list li::before {
+				content: "";
+				width: 6px;
+				height: 6px;
+				background: var(--warm-accent);
+				border-radius: 50%;
+				flex-shrink: 0;
 			}
 
 			.risk-list li:last-child {
@@ -187,16 +208,18 @@ import { SITE_TITLE } from '../../consts';
 
 			/* Email sent */
 			.email-sent {
-				background: var(--bg-science);
-				padding: 1rem 1.5rem;
+				background: white;
+				padding: 1.25rem 1.5rem;
 				border-radius: var(--border-radius);
 				text-align: center;
 				margin-bottom: 2rem;
+				border: 1.5px solid rgba(5, 150, 105, 0.15);
 			}
 
 			.email-sent p {
 				margin: 0;
-				color: var(--science-blue);
+				color: var(--accent);
+				font-size: 0.95rem;
 			}
 
 			/* Video recommend */
@@ -205,8 +228,9 @@ import { SITE_TITLE } from '../../consts';
 			}
 
 			.video-recommend h2 {
-				font-size: 1.2rem;
-				margin-bottom: 1rem;
+				font-size: 1.1rem;
+				margin-bottom: 1.25rem;
+				font-weight: 600;
 			}
 
 			.video-embed {
@@ -214,7 +238,8 @@ import { SITE_TITLE } from '../../consts';
 				padding-bottom: 56.25%;
 				height: 0;
 				overflow: hidden;
-				border-radius: var(--border-radius);
+				border-radius: var(--border-radius-lg);
+				box-shadow: var(--box-shadow);
 			}
 
 			.video-embed iframe {
@@ -227,44 +252,67 @@ import { SITE_TITLE } from '../../consts';
 
 			/* CTA section */
 			.cta-section {
-				background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+				background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #14b8a6 100%);
 				padding: 3rem 2rem;
-				border-radius: var(--border-radius);
+				border-radius: var(--border-radius-lg);
 				text-align: center;
 				color: white;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.cta-section::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+				pointer-events: none;
 			}
 
 			.cta-section h2 {
 				color: white;
-				margin-bottom: 0.5rem;
+				margin-bottom: 0.75rem;
+				position: relative;
+				font-size: 1.5rem;
 			}
 
 			.cta-section p {
 				opacity: 0.9;
-				margin-bottom: 1.5rem;
+				margin-bottom: 1.75rem;
+				position: relative;
+				font-size: 1rem;
 			}
 
 			.cta-btn {
-				display: inline-block;
-				padding: 1rem 2.5rem;
+				display: inline-flex;
+				align-items: center;
+				padding: 1rem 2rem;
 				background: white;
-				color: var(--accent-dark);
+				color: var(--accent);
 				text-decoration: none;
-				font-weight: 700;
+				font-weight: 600;
 				border-radius: var(--border-radius);
 				transition: all var(--transition-fast);
+				position: relative;
+				box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 			}
 
 			.cta-btn:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+				transform: translateY(-3px);
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 			}
 
 			.back-link {
 				display: block;
-				margin-top: 1rem;
+				margin-top: 1.25rem;
 				color: rgba(255, 255, 255, 0.8);
 				text-decoration: none;
+				font-size: 0.95rem;
+				position: relative;
+				transition: color var(--transition-fast);
 			}
 
 			.back-link:hover {
@@ -274,12 +322,16 @@ import { SITE_TITLE } from '../../consts';
 			/* No data state */
 			#no-data {
 				text-align: center;
-				padding: 4rem 2rem;
+				padding: 5rem 2rem;
+				background: white;
+				border-radius: var(--border-radius-lg);
+				box-shadow: var(--box-shadow);
 			}
 
 			#no-data h1 {
 				color: rgb(var(--black));
-				margin-bottom: 1rem;
+				margin-bottom: 0.75rem;
+				font-size: 1.5rem;
 			}
 
 			#no-data p {

@@ -6,78 +6,122 @@ interface Props {
 const { headline = "已協助 50+ 位學員改善代謝健康" } = Astro.props;
 
 const stats = [
-  { value: "8.5", unit: "kg", label: "平均減重", note: "90天內" },
-  { value: "85", unit: "%", label: "脂肪肝改善率", note: "3個月追蹤" },
-  { value: "98", unit: "%", label: "學員滿意度", note: "問卷調查" },
+  { value: "8.5", unit: "kg", label: "平均減重", note: "90天內", icon: "scale" },
+  { value: "85", unit: "%", label: "脂肪肝改善率", note: "3個月追蹤", icon: "heart" },
+  { value: "98", unit: "%", label: "學員滿意度", note: "問卷調查", icon: "star" },
 ];
 ---
 
 <section class="social-proof">
-  <p class="headline">{headline}</p>
-  <div class="stats-grid">
-    {stats.map((stat) => (
-      <div class="stat-card">
-        <div class="stat-value">
-          {stat.value}<span class="stat-unit">{stat.unit}</span>
+  <div class="social-proof-inner">
+    <p class="headline">{headline}</p>
+    <div class="stats-grid">
+      {stats.map((stat) => (
+        <div class="stat-card">
+          <div class="stat-icon">
+            {stat.icon === 'scale' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M12 3v1.5A5.5 5.5 0 0 0 6.5 10H5v4h1.5v1H5v4h14v-4h-1.5v-1H19v-4h-1.5A5.5 5.5 0 0 0 12 4.5V3Z"/>
+              </svg>
+            )}
+            {stat.icon === 'heart' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            )}
+            {stat.icon === 'star' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+              </svg>
+            )}
+          </div>
+          <div class="stat-value">
+            {stat.value}<span class="stat-unit">{stat.unit}</span>
+          </div>
+          <div class="stat-label">{stat.label}</div>
+          <div class="stat-note">{stat.note}</div>
         </div>
-        <div class="stat-label">{stat.label}</div>
-        <div class="stat-note">{stat.note}</div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .social-proof {
-    background: var(--bg-science);
-    padding: 3rem 1rem;
+    background: linear-gradient(180deg, var(--bg-mint) 0%, var(--bg-cream) 100%);
+    padding: 4rem 1.5rem;
     text-align: center;
-    border-top: 1px solid rgba(var(--gray-light), 1);
-    border-bottom: 1px solid rgba(var(--gray-light), 1);
+  }
+
+  .social-proof-inner {
+    max-width: 900px;
+    margin: 0 auto;
   }
 
   .headline {
-    font-size: 1.1rem;
-    color: rgb(var(--gray));
-    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    font-weight: 600;
   }
 
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
   }
 
   .stat-card {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow);
+    transition: all var(--transition-medium);
+  }
+
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow-md);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-mint);
+    border-radius: 50%;
+    color: var(--accent);
+    margin: 0 auto 1rem;
   }
 
   .stat-value {
-    font-size: 3rem;
+    font-size: 2.75rem;
     font-weight: 700;
-    color: var(--science-blue);
+    color: rgb(var(--black));
     line-height: 1;
+    letter-spacing: -0.02em;
   }
 
   .stat-unit {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-left: 0.1em;
+    color: var(--accent);
   }
 
   .stat-label {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     color: rgb(var(--black));
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
   }
 
   .stat-note {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: rgb(var(--gray));
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
   }
 </style>
