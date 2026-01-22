@@ -1,0 +1,470 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+// Surveycake 或 Google 表單嵌入 URL
+const FORM_EMBED_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true";
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead
+			title={`預約諮詢 - ${SITE_TITLE}`}
+			description="預約阿杰博士的免費代謝健康諮詢"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="booking-page">
+			<div class="booking-container">
+				<div class="booking-header">
+					<h1>預約免費諮詢</h1>
+					<p>填寫以下表單，阿杰博士會在 1-2 個工作天內與你聯繫確認諮詢時間</p>
+				</div>
+
+				<div class="booking-content">
+					<div class="form-section">
+						<h2>諮詢預約表單</h2>
+
+						<!-- 選項 1: 嵌入 Google Form / Surveycake -->
+						<!-- <iframe
+							src={FORM_EMBED_URL}
+							width="100%"
+							height="800"
+							frameborder="0"
+							marginheight="0"
+							marginwidth="0">
+							載入中...
+						</iframe> -->
+
+						<!-- 選項 2: 自建表單（連結到 Google Form） -->
+						<form id="booking-form" class="booking-form">
+							<div class="form-group">
+								<label for="name">姓名與稱呼 *</label>
+								<input type="text" id="name" name="name" required placeholder="例：王小明 先生" />
+							</div>
+
+							<div class="form-group">
+								<label for="email">Email *</label>
+								<input type="email" id="email" name="email" required placeholder="your@email.com" />
+							</div>
+
+							<div class="form-group">
+								<label>你目前最困擾的健康問題？（可複選）*</label>
+								<div class="checkbox-group">
+									<label class="checkbox-label">
+										<input type="checkbox" name="concerns" value="weight" /> 體重管理
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="concerns" value="metabolic" /> 三高問題
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="concerns" value="fatigue" /> 慢性疲勞
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="concerns" value="sleep" /> 睡眠品質
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="concerns" value="other" /> 其他
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="treatment">是否有進行中的醫療治療？</label>
+								<select id="treatment" name="treatment">
+									<option value="no">否</option>
+									<option value="yes">是（請在下方說明）</option>
+								</select>
+							</div>
+
+							<div class="form-group" id="treatment-detail-group" style="display: none;">
+								<label for="treatment-detail">請簡述目前的治療情況</label>
+								<textarea id="treatment-detail" name="treatment-detail" rows="3" placeholder="例：目前服用降血壓藥物..."></textarea>
+							</div>
+
+							<div class="form-group">
+								<label for="goal">你希望在 90 天後達成什麼目標？*</label>
+								<textarea id="goal" name="goal" rows="3" required placeholder="例：減重 5 公斤、改善餐後嗜睡、降低血糖指數..."></textarea>
+							</div>
+
+							<div class="form-group">
+								<label>方便諮詢的時段？（可複選）*</label>
+								<div class="checkbox-group">
+									<label class="checkbox-label">
+										<input type="checkbox" name="time" value="weekday-morning" /> 平日上午
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="time" value="weekday-afternoon" /> 平日下午
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="time" value="weekday-evening" /> 平日晚上
+									</label>
+									<label class="checkbox-label">
+										<input type="checkbox" name="time" value="weekend" /> 週末
+									</label>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="source">你是如何認識阿杰博士的？</label>
+								<select id="source" name="source">
+									<option value="">請選擇</option>
+									<option value="search">Google 搜尋</option>
+									<option value="youtube">YouTube</option>
+									<option value="instagram">Instagram</option>
+									<option value="referral">朋友介紹</option>
+									<option value="other">其他</option>
+								</select>
+							</div>
+
+							<button type="submit" class="submit-btn">送出預約申請</button>
+						</form>
+					</div>
+
+					<div class="info-section">
+						<div class="info-card">
+							<h3>諮詢包含什麼？</h3>
+							<ul>
+								<li>30 分鐘一對一視訊諮詢</li>
+								<li>初步健康狀況評估</li>
+								<li>個人化改善方向建議</li>
+								<li>解答你的健康疑問</li>
+							</ul>
+						</div>
+
+						<div class="info-card">
+							<h3>諮詢前準備</h3>
+							<ul>
+								<li>近期健檢報告（如有）</li>
+								<li>目前用藥清單（如有）</li>
+								<li>想詢問的問題列表</li>
+							</ul>
+						</div>
+
+						<div class="quiz-prompt">
+							<p>還沒做過代謝年齡測驗？</p>
+							<a href="/quiz" class="quiz-link">先做免費測驗 →</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Success Modal -->
+			<div id="success-modal" class="modal" style="display: none;">
+				<div class="modal-content">
+					<div class="modal-icon">✅</div>
+					<h2>已收到你的預約申請！</h2>
+					<p>阿杰博士會在 1-2 個工作天內，透過 Email 與你確認諮詢時間。</p>
+					<div class="modal-video">
+						<p>在等待期間，推薦你先觀看：</p>
+						<a href="https://www.youtube.com/@AugustLin123" target="_blank" class="video-link">
+							🎬 什麼是代謝靈活性？
+						</a>
+					</div>
+					<a href="/" class="modal-btn">返回首頁</a>
+				</div>
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.booking-page {
+				padding: 2rem 1rem;
+			}
+
+			.booking-container {
+				max-width: 1000px;
+				margin: 0 auto;
+			}
+
+			.booking-header {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+
+			.booking-header h1 {
+				color: var(--accent-dark);
+				margin-bottom: 0.5rem;
+			}
+
+			.booking-header p {
+				color: rgb(var(--gray));
+			}
+
+			.booking-content {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 2rem;
+			}
+
+			@media (min-width: 768px) {
+				.booking-content {
+					grid-template-columns: 2fr 1fr;
+				}
+			}
+
+			/* Form styles */
+			.form-section {
+				background: white;
+				padding: 2rem;
+				border-radius: var(--border-radius);
+				box-shadow: var(--box-shadow);
+			}
+
+			.form-section h2 {
+				font-size: 1.3rem;
+				margin-bottom: 1.5rem;
+				color: rgb(var(--black));
+			}
+
+			.form-group {
+				margin-bottom: 1.5rem;
+			}
+
+			.form-group label {
+				display: block;
+				margin-bottom: 0.5rem;
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+			}
+
+			.form-group input[type="text"],
+			.form-group input[type="email"],
+			.form-group select,
+			.form-group textarea {
+				width: 100%;
+				padding: 0.75rem 1rem;
+				border: 2px solid rgb(var(--gray-light));
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+				transition: border-color var(--transition-fast);
+			}
+
+			.form-group input:focus,
+			.form-group select:focus,
+			.form-group textarea:focus {
+				outline: none;
+				border-color: var(--accent);
+			}
+
+			.checkbox-group {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+			}
+
+			.checkbox-label {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.5rem 1rem;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: var(--border-radius);
+				cursor: pointer;
+				transition: all var(--transition-fast);
+				font-weight: normal;
+			}
+
+			.checkbox-label:hover {
+				border-color: var(--accent);
+			}
+
+			.checkbox-label input:checked + .checkbox-label,
+			.checkbox-label:has(input:checked) {
+				background: var(--bg-warm);
+				border-color: var(--accent);
+			}
+
+			.submit-btn {
+				width: 100%;
+				padding: 1rem;
+				background: var(--accent);
+				color: white;
+				border: none;
+				border-radius: var(--border-radius);
+				font-size: 1.1rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition: all var(--transition-fast);
+			}
+
+			.submit-btn:hover {
+				background: var(--accent-dark);
+			}
+
+			/* Info section */
+			.info-section {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+			}
+
+			.info-card {
+				background: white;
+				padding: 1.5rem;
+				border-radius: var(--border-radius);
+				box-shadow: var(--box-shadow);
+			}
+
+			.info-card h3 {
+				font-size: 1.1rem;
+				color: var(--accent-dark);
+				margin-bottom: 1rem;
+			}
+
+			.info-card ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.info-card li {
+				padding: 0.5rem 0;
+				color: rgb(var(--gray-dark));
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+
+			.info-card li:last-child {
+				border-bottom: none;
+			}
+
+			.info-card li::before {
+				content: "✓ ";
+				color: var(--health-green);
+			}
+
+			.quiz-prompt {
+				background: var(--bg-science);
+				padding: 1.5rem;
+				border-radius: var(--border-radius);
+				text-align: center;
+			}
+
+			.quiz-prompt p {
+				margin-bottom: 0.5rem;
+				color: rgb(var(--gray));
+			}
+
+			.quiz-link {
+				color: var(--science-blue);
+				font-weight: 600;
+				text-decoration: none;
+			}
+
+			.quiz-link:hover {
+				text-decoration: underline;
+			}
+
+			/* Modal */
+			.modal {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.5);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 1000;
+				padding: 1rem;
+			}
+
+			.modal-content {
+				background: white;
+				padding: 3rem 2rem;
+				border-radius: var(--border-radius);
+				max-width: 500px;
+				width: 100%;
+				text-align: center;
+			}
+
+			.modal-icon {
+				font-size: 3rem;
+				margin-bottom: 1rem;
+			}
+
+			.modal-content h2 {
+				color: var(--health-green);
+				margin-bottom: 1rem;
+			}
+
+			.modal-content p {
+				color: rgb(var(--gray-dark));
+				margin-bottom: 1.5rem;
+			}
+
+			.modal-video {
+				background: var(--bg-warm);
+				padding: 1rem;
+				border-radius: var(--border-radius);
+				margin-bottom: 1.5rem;
+			}
+
+			.modal-video p {
+				margin-bottom: 0.5rem;
+				font-size: 0.9rem;
+			}
+
+			.video-link {
+				color: var(--accent);
+				font-weight: 600;
+				text-decoration: none;
+			}
+
+			.modal-btn {
+				display: inline-block;
+				padding: 0.75rem 2rem;
+				background: var(--accent);
+				color: white;
+				text-decoration: none;
+				border-radius: var(--border-radius);
+				font-weight: 600;
+			}
+		</style>
+
+		<script>
+			// Show/hide treatment detail field
+			const treatmentSelect = document.getElementById('treatment') as HTMLSelectElement;
+			const treatmentDetailGroup = document.getElementById('treatment-detail-group') as HTMLElement;
+
+			treatmentSelect?.addEventListener('change', () => {
+				treatmentDetailGroup.style.display = treatmentSelect.value === 'yes' ? 'block' : 'none';
+			});
+
+			// Form submission
+			const bookingForm = document.getElementById('booking-form') as HTMLFormElement;
+			const successModal = document.getElementById('success-modal') as HTMLElement;
+
+			bookingForm?.addEventListener('submit', (e) => {
+				e.preventDefault();
+
+				// Collect form data
+				const formData = new FormData(bookingForm);
+				const data: Record<string, any> = {};
+
+				formData.forEach((value, key) => {
+					if (data[key]) {
+						if (Array.isArray(data[key])) {
+							data[key].push(value);
+						} else {
+							data[key] = [data[key], value];
+						}
+					} else {
+						data[key] = value;
+					}
+				});
+
+				console.log('Booking form data:', data);
+
+				// TODO: Send to Google Form / Surveycake / Backend
+				// For now, just show success modal
+				successModal.style.display = 'flex';
+			});
+		</script>
+	</body>
+</html>
