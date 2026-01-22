@@ -1,0 +1,387 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead
+			title={`測驗結果 - ${SITE_TITLE}`}
+			description="你的代謝年齡測驗結果"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="result-page">
+			<div class="result-container">
+				<!-- Loading state -->
+				<div id="loading" class="loading">
+					<p>計算你的代謝年齡中...</p>
+				</div>
+
+				<!-- Result content -->
+				<div id="result-content" style="display: none;">
+					<div class="result-card">
+						<h1>你的代謝年齡</h1>
+						<div class="age-display">
+							<span id="metabolic-age" class="metabolic-age">--</span>
+							<span class="age-unit">歲</span>
+						</div>
+						<p class="actual-age">實際年齡：<span id="actual-age">--</span> 歲</p>
+						<div id="age-diff" class="age-diff"></div>
+					</div>
+
+					<div class="risk-section">
+						<h2>你的主要代謝風險</h2>
+						<ul id="risk-list" class="risk-list">
+							<!-- Populated by JS -->
+						</ul>
+					</div>
+
+					<div class="email-sent">
+						<p>完整報告已寄送到 <strong id="user-email">your@email.com</strong></p>
+					</div>
+
+					<div class="video-recommend">
+						<h2>推薦你先看這支影片</h2>
+						<div class="video-embed">
+							<iframe
+								id="recommended-video"
+								width="560"
+								height="315"
+								src="https://www.youtube.com/embed/VIDEO_ID"
+								title="推薦影片"
+								frameborder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowfullscreen>
+							</iframe>
+						</div>
+					</div>
+
+					<div class="cta-section">
+						<h2>想要逆轉代謝年齡？</h2>
+						<p>預約免費諮詢，讓阿杰博士協助你打造專屬的代謝改善計畫</p>
+						<a href="/booking" class="cta-btn">預約免費諮詢</a>
+						<a href="/" class="back-link">← 返回首頁</a>
+					</div>
+				</div>
+
+				<!-- No data state -->
+				<div id="no-data" style="display: none;">
+					<h1>尚未完成測驗</h1>
+					<p>請先完成代謝年齡測驗</p>
+					<a href="/quiz" class="cta-btn">開始測驗</a>
+				</div>
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.result-page {
+				padding: 2rem 1rem;
+			}
+
+			.result-container {
+				max-width: 700px;
+				margin: 0 auto;
+			}
+
+			.loading {
+				text-align: center;
+				padding: 4rem 2rem;
+			}
+
+			.result-card {
+				background: white;
+				padding: 3rem 2rem;
+				border-radius: var(--border-radius);
+				box-shadow: var(--box-shadow);
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+
+			.result-card h1 {
+				color: rgb(var(--gray));
+				font-size: 1.2rem;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				margin-bottom: 1rem;
+			}
+
+			.age-display {
+				margin-bottom: 0.5rem;
+			}
+
+			.metabolic-age {
+				font-size: 5rem;
+				font-weight: 700;
+				line-height: 1;
+			}
+
+			.age-unit {
+				font-size: 2rem;
+				color: rgb(var(--gray));
+			}
+
+			.actual-age {
+				color: rgb(var(--gray));
+				margin-bottom: 1rem;
+			}
+
+			.age-diff {
+				font-size: 1.1rem;
+				font-weight: 600;
+				padding: 0.75rem 1.5rem;
+				border-radius: var(--border-radius);
+				display: inline-block;
+			}
+
+			.age-diff.warning {
+				background: #fef3c7;
+				color: #92400e;
+			}
+
+			.age-diff.danger {
+				background: #fee2e2;
+				color: #991b1b;
+			}
+
+			.age-diff.good {
+				background: #dcfce7;
+				color: #166534;
+			}
+
+			/* Risk section */
+			.risk-section {
+				background: white;
+				padding: 2rem;
+				border-radius: var(--border-radius);
+				box-shadow: var(--box-shadow);
+				margin-bottom: 2rem;
+			}
+
+			.risk-section h2 {
+				font-size: 1.2rem;
+				color: rgb(var(--black));
+				margin-bottom: 1rem;
+			}
+
+			.risk-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.risk-list li {
+				padding: 0.75rem 0;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+			}
+
+			.risk-list li:last-child {
+				border-bottom: none;
+			}
+
+			/* Email sent */
+			.email-sent {
+				background: var(--bg-science);
+				padding: 1rem 1.5rem;
+				border-radius: var(--border-radius);
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+
+			.email-sent p {
+				margin: 0;
+				color: var(--science-blue);
+			}
+
+			/* Video recommend */
+			.video-recommend {
+				margin-bottom: 2rem;
+			}
+
+			.video-recommend h2 {
+				font-size: 1.2rem;
+				margin-bottom: 1rem;
+			}
+
+			.video-embed {
+				position: relative;
+				padding-bottom: 56.25%;
+				height: 0;
+				overflow: hidden;
+				border-radius: var(--border-radius);
+			}
+
+			.video-embed iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			/* CTA section */
+			.cta-section {
+				background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+				padding: 3rem 2rem;
+				border-radius: var(--border-radius);
+				text-align: center;
+				color: white;
+			}
+
+			.cta-section h2 {
+				color: white;
+				margin-bottom: 0.5rem;
+			}
+
+			.cta-section p {
+				opacity: 0.9;
+				margin-bottom: 1.5rem;
+			}
+
+			.cta-btn {
+				display: inline-block;
+				padding: 1rem 2.5rem;
+				background: white;
+				color: var(--accent-dark);
+				text-decoration: none;
+				font-weight: 700;
+				border-radius: var(--border-radius);
+				transition: all var(--transition-fast);
+			}
+
+			.cta-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+			}
+
+			.back-link {
+				display: block;
+				margin-top: 1rem;
+				color: rgba(255, 255, 255, 0.8);
+				text-decoration: none;
+			}
+
+			.back-link:hover {
+				color: white;
+			}
+
+			/* No data state */
+			#no-data {
+				text-align: center;
+				padding: 4rem 2rem;
+			}
+
+			#no-data h1 {
+				color: rgb(var(--black));
+				margin-bottom: 1rem;
+			}
+
+			#no-data p {
+				color: rgb(var(--gray));
+				margin-bottom: 2rem;
+			}
+		</style>
+
+		<script>
+			// Video recommendations based on concern
+			const videoRecommendations: Record<string, string> = {
+				weight: 'VIDEO_ID_WEIGHT',
+				fatigue: 'VIDEO_ID_FATIGUE',
+				metabolic: 'VIDEO_ID_METABOLIC',
+				sleep: 'VIDEO_ID_SLEEP',
+				other: 'VIDEO_ID_DEFAULT'
+			};
+
+			// Risk messages based on score ranges
+			const riskMessages: Record<string, string[]> = {
+				low: [
+					'維持目前良好的生活習慣',
+					'可考慮進階的代謝優化策略'
+				],
+				medium: [
+					'餐後血糖波動較大（餐後嗜睡）',
+					'運動量不足，線粒體功能待提升',
+					'睡眠品質影響代謝恢復'
+				],
+				high: [
+					'代謝靈活性明顯下降',
+					'胰島素阻抗風險較高',
+					'建議盡快進行專業代謝評估',
+					'生活型態需要系統性調整'
+				]
+			};
+
+			// Load result from sessionStorage
+			document.addEventListener('DOMContentLoaded', () => {
+				const loading = document.getElementById('loading') as HTMLElement;
+				const resultContent = document.getElementById('result-content') as HTMLElement;
+				const noData = document.getElementById('no-data') as HTMLElement;
+
+				const resultDataStr = sessionStorage.getItem('quizResult');
+
+				if (!resultDataStr) {
+					loading.style.display = 'none';
+					noData.style.display = 'block';
+					return;
+				}
+
+				const resultData = JSON.parse(resultDataStr);
+
+				// Simulate loading
+				setTimeout(() => {
+					loading.style.display = 'none';
+					resultContent.style.display = 'block';
+
+					// Display metabolic age
+					const metabolicAgeEl = document.getElementById('metabolic-age') as HTMLElement;
+					const actualAgeEl = document.getElementById('actual-age') as HTMLElement;
+					const ageDiffEl = document.getElementById('age-diff') as HTMLElement;
+					const userEmailEl = document.getElementById('user-email') as HTMLElement;
+					const riskListEl = document.getElementById('risk-list') as HTMLElement;
+					const videoEl = document.getElementById('recommended-video') as HTMLIFrameElement;
+
+					metabolicAgeEl.textContent = resultData.metabolicAge.toString();
+					actualAgeEl.textContent = resultData.actualAge.toString();
+					userEmailEl.textContent = resultData.email;
+
+					// Calculate and display age difference
+					const diff = resultData.metabolicAge - resultData.actualAge;
+					if (diff <= 5) {
+						metabolicAgeEl.style.color = 'var(--health-green)';
+						ageDiffEl.className = 'age-diff good';
+						ageDiffEl.textContent = diff <= 0
+							? '太棒了！代謝年齡與實際年齡相當'
+							: `代謝年齡比實際年齡大 ${diff} 歲`;
+					} else if (diff <= 15) {
+						metabolicAgeEl.style.color = 'var(--accent)';
+						ageDiffEl.className = 'age-diff warning';
+						ageDiffEl.textContent = `代謝年齡比實際年齡大 ${diff} 歲`;
+					} else {
+						metabolicAgeEl.style.color = '#dc2626';
+						ageDiffEl.className = 'age-diff danger';
+						ageDiffEl.textContent = `代謝年齡比實際年齡大 ${diff} 歲`;
+					}
+
+					// Display risk messages
+					let riskLevel = 'low';
+					if (diff > 15) riskLevel = 'high';
+					else if (diff > 5) riskLevel = 'medium';
+
+					const risks = riskMessages[riskLevel];
+					riskListEl.innerHTML = risks.map(r => `<li>${r}</li>`).join('');
+
+					// Set recommended video
+					const videoId = videoRecommendations[resultData.mainConcern] || videoRecommendations.other;
+					videoEl.src = `https://www.youtube.com/embed/${videoId}`;
+
+				}, 1500);
+			});
+		</script>
+	</body>
+</html>
