@@ -231,15 +231,18 @@ import { SITE_TITLE } from '../../consts';
 				font-size: 1.1rem;
 				margin-bottom: 1.25rem;
 				font-weight: 600;
+				text-align: center;
 			}
 
 			.video-embed {
 				position: relative;
-				padding-bottom: 56.25%;
+				padding-bottom: 177.78%; /* 9:16 vertical ratio for YouTube Shorts */
 				height: 0;
 				overflow: hidden;
 				border-radius: var(--border-radius-lg);
 				box-shadow: var(--box-shadow);
+				max-width: 320px;
+				margin: 0 auto;
 			}
 
 			.video-embed iframe {

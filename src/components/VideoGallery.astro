@@ -23,73 +23,155 @@ const {
 ---
 
 <section class="video-gallery">
-  <h2 class="section-title">{title}</h2>
-  <div class="video-grid">
-    {videos.map((video) => (
-      <a
-        href={`https://www.youtube.com/watch?v=${video.id}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="video-card"
-      >
-        <div class="video-thumbnail">
-          <img
-            src={video.thumbnail || `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
-            alt={video.title}
-            loading="lazy"
-          />
-          <div class="play-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
+  <div class="video-gallery-inner">
+    <div class="video-header">
+      <span class="video-badge">精選內容</span>
+      <h2 class="section-title">{title}</h2>
+      <p class="video-subtitle">以科學為基礎的健康知識，幫助你建立正確的代謝觀念</p>
+    </div>
+    <div class="video-grid">
+      {videos.map((video, index) => (
+        <a
+          href={`https://www.youtube.com/watch?v=${video.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="video-card"
+          style={`--delay: ${index * 0.1}s`}
+        >
+          <div class="video-thumbnail">
+            <img
+              src={video.thumbnail || `https://img.youtube.com/vi/${video.id}/mqdefault.jpg`}
+              alt={video.title}
+              loading="lazy"
+            />
+            <div class="play-overlay">
+              <div class="play-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="video-badge-youtube">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+              </svg>
+              YouTube
+            </div>
           </div>
-        </div>
-        <h3 class="video-title">{video.title}</h3>
+          <div class="video-info">
+            <h3 class="video-title">{video.title}</h3>
+            <span class="video-cta">點擊觀看 →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="channel-link">
+      <a href={youtubeChannel} target="_blank" rel="noopener noreferrer" class="channel-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+        </svg>
+        <span>訂閱 YouTube 頻道</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" class="arrow-icon">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+        </svg>
       </a>
-    ))}
-  </div>
-  <div class="channel-link">
-    <a href={youtubeChannel} target="_blank" rel="noopener noreferrer">
-      觀看更多影片 →
-    </a>
+    </div>
   </div>
 </section>
 
 <style>
   .video-gallery {
-    padding: 4rem 1rem;
-    max-width: 960px;
+    padding: 6rem 1.5rem 7rem;
+    background: linear-gradient(180deg, var(--bg-cream) 0%, white 30%, white 70%, var(--bg-cream) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 10%, rgba(0, 0, 0, 0.05) 50%, transparent 90%);
+  }
+
+  .video-gallery-inner {
+    max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .video-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .video-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    padding: 0.65rem 1.35rem;
+    background: linear-gradient(135deg, var(--bg-mint) 0%, rgba(236, 253, 245, 0.6) 100%);
+    border-radius: var(--border-radius-xl);
+    border: 1px solid rgba(5, 150, 105, 0.12);
   }
 
   .section-title {
-    text-align: center;
-    color: var(--accent-dark);
-    margin-bottom: 2rem;
+    color: rgb(var(--black));
+    margin-bottom: 1.25rem;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+  }
+
+  @media(min-width: 768px) {
+    .section-title {
+      font-size: 2.75rem;
+    }
+  }
+
+  .video-subtitle {
+    color: rgb(var(--gray));
+    max-width: 540px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.75;
   }
 
   .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.25rem;
   }
 
   .video-card {
     text-decoration: none;
     color: inherit;
-    transition: transform var(--transition-fast);
+    transition: all var(--transition-medium);
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
   }
 
   .video-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.15);
   }
 
   .video-thumbnail {
     position: relative;
     aspect-ratio: 16 / 9;
     overflow: hidden;
-    border-radius: var(--border-radius);
-    background: rgb(var(--gray-light));
+    background: linear-gradient(135deg, rgb(var(--gray-light)) 0%, #e2e8f0 100%);
   }
 
   .video-thumbnail img {
@@ -100,47 +182,140 @@ const {
   }
 
   .video-card:hover .video-thumbnail img {
-    transform: scale(1.05);
+    transform: scale(1.08);
+  }
+
+  .play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.95;
+    transition: opacity var(--transition-fast);
+  }
+
+  .video-card:hover .play-overlay {
+    opacity: 1;
   }
 
   .play-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 64px;
-    height: 64px;
-    background: rgba(0, 0, 0, 0.7);
+    width: 72px;
+    height: 72px;
+    background: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    transition: background var(--transition-fast);
+    color: var(--accent);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+    transition: all var(--transition-fast);
+    padding-left: 5px;
   }
 
   .video-card:hover .play-icon {
+    transform: scale(1.12);
     background: var(--accent);
+    color: white;
+    box-shadow: 0 16px 40px rgba(5, 150, 105, 0.4);
+  }
+
+  .video-badge-youtube {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.85rem;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    backdrop-filter: blur(8px);
+  }
+
+  .video-info {
+    padding: 1.75rem;
   }
 
   .video-title {
-    font-size: 1rem;
-    margin-top: 0.75rem;
+    font-size: 1.15rem;
     color: rgb(var(--black));
+    font-weight: 700;
+    margin-bottom: 0.85rem;
+    letter-spacing: -0.015em;
+    line-height: 1.4;
+  }
+
+  .video-cta {
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 600;
+    transition: color var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .video-card:hover .video-cta {
+    color: var(--accent-dark);
   }
 
   .channel-link {
     text-align: center;
-    margin-top: 2rem;
+    margin-top: 4rem;
   }
 
-  .channel-link a {
-    color: var(--accent);
-    font-weight: 600;
+  .channel-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 1.1rem 2.25rem;
+    background: white;
+    color: #ff0000;
+    font-weight: 700;
     text-decoration: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all var(--transition-fast);
+    border: 2px solid rgba(255, 0, 0, 0.12);
   }
 
-  .channel-link a:hover {
-    text-decoration: underline;
+  .channel-btn:hover {
+    background: #ff0000;
+    color: white;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(255, 0, 0, 0.28);
+    border-color: transparent;
+  }
+
+  .channel-btn .arrow-icon {
+    transition: transform var(--transition-fast);
+  }
+
+  .channel-btn:hover .arrow-icon {
+    transform: translateX(5px);
+  }
+
+  @media(min-width: 768px) {
+    .video-gallery {
+      padding: 8rem 2rem 9rem;
+    }
+
+    .video-grid {
+      gap: 2.5rem;
+    }
+  }
+
+  @media(min-width: 1024px) {
+    .video-gallery {
+      padding: 9rem 3rem 10rem;
+    }
   }
 </style>
