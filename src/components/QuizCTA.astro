@@ -1,0 +1,110 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'banner';
+  title?: string;
+  description?: string;
+  buttonText?: string;
+}
+
+const {
+  variant = 'primary',
+  title = "你的代謝年齡是幾歲？",
+  description = "花 2 分鐘完成測驗，了解你的身體真實狀態",
+  buttonText = "免費測驗"
+} = Astro.props;
+---
+
+{variant === 'banner' ? (
+  <section class="quiz-cta-banner">
+    <div class="banner-content">
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <a href="/quiz" class="cta-btn primary">{buttonText}</a>
+    </div>
+  </section>
+) : (
+  <div class={`quiz-cta-inline ${variant}`}>
+    <a href="/quiz" class={`cta-btn ${variant}`}>
+      {buttonText}：{title}
+    </a>
+  </div>
+)}
+
+<style>
+  /* Banner variant */
+  .quiz-cta-banner {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    padding: 4rem 1rem;
+    text-align: center;
+  }
+
+  .banner-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .banner-content h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .banner-content p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .quiz-cta-banner .cta-btn {
+    background: white;
+    color: var(--accent-dark);
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: var(--border-radius);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .quiz-cta-banner .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Inline variants */
+  .quiz-cta-inline {
+    display: inline-block;
+  }
+
+  .quiz-cta-inline .cta-btn {
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    border: 2px solid var(--accent);
+    transition: all var(--transition-fast);
+  }
+
+  .quiz-cta-inline .cta-btn.primary {
+    background: var(--accent);
+    color: white;
+  }
+
+  .quiz-cta-inline .cta-btn.primary:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  .quiz-cta-inline .cta-btn.secondary {
+    background: transparent;
+    color: var(--accent);
+  }
+
+  .quiz-cta-inline .cta-btn.secondary:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+  }
+</style>
