@@ -1,0 +1,440 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<BaseHead
+			title={`代謝年齡測驗 - ${SITE_TITLE}`}
+			description="花 2 分鐘完成測驗，了解你的代謝年齡與改善方向"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="quiz-page">
+			<div class="quiz-container">
+				<div class="quiz-header">
+					<h1>代謝年齡測驗</h1>
+					<p>回答 7 個簡單問題，了解你的身體真實狀態</p>
+				</div>
+
+				<div id="quiz-app">
+					<!-- Question slides -->
+					<div class="quiz-questions">
+						<!-- Q1 -->
+						<div class="question-slide" data-question="1">
+							<div class="progress-bar"><div class="progress" style="width: 14%"></div></div>
+							<p class="question-number">問題 1 / 7</p>
+							<h2>你的年齡區間？</h2>
+							<div class="options">
+								<button class="option-btn" data-value="30-40" data-score="0">30-40 歲</button>
+								<button class="option-btn" data-value="40-50" data-score="5">40-50 歲</button>
+								<button class="option-btn" data-value="50-60" data-score="10">50-60 歲</button>
+								<button class="option-btn" data-value="60+" data-score="15">60 歲以上</button>
+							</div>
+						</div>
+
+						<!-- Q2 -->
+						<div class="question-slide" data-question="2" style="display: none;">
+							<div class="progress-bar"><div class="progress" style="width: 28%"></div></div>
+							<p class="question-number">問題 2 / 7</p>
+							<h2>餐後是否容易感到昏沉想睡？</h2>
+							<div class="options">
+								<button class="option-btn" data-value="often" data-score="10">常常</button>
+								<button class="option-btn" data-value="sometimes" data-score="5">偶爾</button>
+								<button class="option-btn" data-value="rarely" data-score="0">很少</button>
+							</div>
+						</div>
+
+						<!-- Q3 -->
+						<div class="question-slide" data-question="3" style="display: none;">
+							<div class="progress-bar"><div class="progress" style="width: 42%"></div></div>
+							<p class="question-number">問題 3 / 7</p>
+							<h2>是否有三高問題？（可複選）</h2>
+							<div class="options multi-select">
+								<button class="option-btn" data-value="blood-pressure" data-score="5">高血壓</button>
+								<button class="option-btn" data-value="blood-sugar" data-score="5">高血糖</button>
+								<button class="option-btn" data-value="blood-lipid" data-score="5">高血脂</button>
+								<button class="option-btn" data-value="none" data-score="0">都沒有</button>
+							</div>
+							<button class="next-btn" style="display: none;">下一題 →</button>
+						</div>
+
+						<!-- Q4 -->
+						<div class="question-slide" data-question="4" style="display: none;">
+							<div class="progress-bar"><div class="progress" style="width: 56%"></div></div>
+							<p class="question-number">問題 4 / 7</p>
+							<h2>目前的運動頻率？</h2>
+							<div class="options">
+								<button class="option-btn" data-value="none" data-score="10">幾乎沒有</button>
+								<button class="option-btn" data-value="1-2" data-score="5">每週 1-2 次</button>
+								<button class="option-btn" data-value="3+" data-score="0">每週 3 次以上</button>
+							</div>
+						</div>
+
+						<!-- Q5 -->
+						<div class="question-slide" data-question="5" style="display: none;">
+							<div class="progress-bar"><div class="progress" style="width: 70%"></div></div>
+							<p class="question-number">問題 5 / 7</p>
+							<h2>睡眠品質如何？</h2>
+							<div class="options">
+								<button class="option-btn" data-value="insomnia" data-score="10">常失眠</button>
+								<button class="option-btn" data-value="light" data-score="5">淺眠易醒</button>
+								<button class="option-btn" data-value="good" data-score="0">睡得不錯</button>
+							</div>
+						</div>
+
+						<!-- Q6 -->
+						<div class="question-slide" data-question="6" style="display: none;">
+							<div class="progress-bar"><div class="progress" style="width: 84%"></div></div>
+							<p class="question-number">問題 6 / 7</p>
+							<h2>是否嘗試過減重但反覆失敗？</h2>
+							<div class="options">
+								<button class="option-btn" data-value="yes" data-score="5">是</button>
+								<button class="option-btn" data-value="no" data-score="0">否</button>
+							</div>
+						</div>
+
+						<!-- Q7 -->
+						<div class="question-slide" data-question="7" style="display: none;">
+							<div class="progress-bar"><div class="progress" style="width: 100%"></div></div>
+							<p class="question-number">問題 7 / 7</p>
+							<h2>最困擾你的健康問題是？</h2>
+							<div class="options">
+								<button class="option-btn" data-value="weight" data-score="0">體重</button>
+								<button class="option-btn" data-value="fatigue" data-score="0">疲勞</button>
+								<button class="option-btn" data-value="metabolic" data-score="0">三高</button>
+								<button class="option-btn" data-value="sleep" data-score="0">睡眠</button>
+								<button class="option-btn" data-value="other" data-score="0">其他</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Email capture -->
+					<div class="email-capture" style="display: none;">
+						<h2>測驗完成！</h2>
+						<p>輸入 Email 查看你的代謝年齡報告</p>
+						<form id="email-form">
+							<input type="email" id="email-input" placeholder="your@email.com" required />
+							<button type="submit" class="submit-btn">查看結果</button>
+						</form>
+						<p class="privacy-note">我們重視你的隱私，不會發送垃圾郵件</p>
+					</div>
+				</div>
+			</div>
+		</main>
+		<Footer />
+
+		<style>
+			.quiz-page {
+				min-height: 70vh;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 2rem 1rem;
+			}
+
+			.quiz-container {
+				max-width: 600px;
+				width: 100%;
+			}
+
+			.quiz-header {
+				text-align: center;
+				margin-bottom: 2rem;
+			}
+
+			.quiz-header h1 {
+				color: var(--accent-dark);
+				margin-bottom: 0.5rem;
+			}
+
+			.quiz-header p {
+				color: rgb(var(--gray));
+			}
+
+			.question-slide {
+				background: white;
+				padding: 2rem;
+				border-radius: var(--border-radius);
+				box-shadow: var(--box-shadow);
+			}
+
+			.progress-bar {
+				height: 6px;
+				background: rgb(var(--gray-light));
+				border-radius: 3px;
+				margin-bottom: 1.5rem;
+				overflow: hidden;
+			}
+
+			.progress {
+				height: 100%;
+				background: var(--health-green);
+				transition: width 0.3s ease;
+			}
+
+			.question-number {
+				font-size: 0.85rem;
+				color: rgb(var(--gray));
+				margin-bottom: 0.5rem;
+			}
+
+			.question-slide h2 {
+				font-size: 1.4rem;
+				color: rgb(var(--black));
+				margin-bottom: 1.5rem;
+			}
+
+			.options {
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+
+			.option-btn {
+				padding: 1rem 1.5rem;
+				border: 2px solid rgb(var(--gray-light));
+				background: white;
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+				cursor: pointer;
+				transition: all var(--transition-fast);
+				text-align: left;
+			}
+
+			.option-btn:hover {
+				border-color: var(--accent);
+				background: var(--bg-warm);
+			}
+
+			.option-btn.selected {
+				border-color: var(--accent);
+				background: var(--accent);
+				color: white;
+			}
+
+			.multi-select .option-btn.selected {
+				background: var(--health-green);
+				border-color: var(--health-green);
+			}
+
+			.next-btn {
+				margin-top: 1.5rem;
+				padding: 1rem 2rem;
+				background: var(--accent);
+				color: white;
+				border: none;
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				width: 100%;
+				transition: all var(--transition-fast);
+			}
+
+			.next-btn:hover {
+				background: var(--accent-dark);
+			}
+
+			/* Email capture */
+			.email-capture {
+				background: white;
+				padding: 2rem;
+				border-radius: var(--border-radius);
+				box-shadow: var(--box-shadow);
+				text-align: center;
+			}
+
+			.email-capture h2 {
+				color: var(--health-green);
+				margin-bottom: 0.5rem;
+			}
+
+			.email-capture p {
+				color: rgb(var(--gray));
+				margin-bottom: 1.5rem;
+			}
+
+			#email-form {
+				display: flex;
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			#email-input {
+				padding: 1rem;
+				border: 2px solid rgb(var(--gray-light));
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+			}
+
+			#email-input:focus {
+				outline: none;
+				border-color: var(--accent);
+			}
+
+			.submit-btn {
+				padding: 1rem;
+				background: var(--accent);
+				color: white;
+				border: none;
+				border-radius: var(--border-radius);
+				font-size: 1rem;
+				font-weight: 600;
+				cursor: pointer;
+				transition: all var(--transition-fast);
+			}
+
+			.submit-btn:hover {
+				background: var(--accent-dark);
+			}
+
+			.privacy-note {
+				font-size: 0.8rem;
+				color: rgb(var(--gray));
+				margin-top: 1rem;
+				margin-bottom: 0;
+			}
+		</style>
+
+		<script>
+			// Quiz state
+			let currentQuestion = 1;
+			let totalScore = 0;
+			let userAge = '40-50';
+			let mainConcern = 'weight';
+			const answers: Record<string, string | string[]> = {};
+
+			// DOM elements
+			const slides = document.querySelectorAll('.question-slide');
+			const emailCapture = document.querySelector('.email-capture') as HTMLElement;
+			const emailForm = document.getElementById('email-form') as HTMLFormElement;
+
+			// Handle single-select options
+			document.querySelectorAll('.options:not(.multi-select) .option-btn').forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					const target = e.currentTarget as HTMLButtonElement;
+					const slide = target.closest('.question-slide') as HTMLElement;
+					const questionNum = parseInt(slide.dataset.question || '1');
+					const score = parseInt(target.dataset.score || '0');
+					const value = target.dataset.value || '';
+
+					// Store answer
+					answers[`q${questionNum}`] = value;
+					totalScore += score;
+
+					// Track specific answers
+					if (questionNum === 1) userAge = value;
+					if (questionNum === 7) mainConcern = value;
+
+					// Visual feedback
+					slide.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+					target.classList.add('selected');
+
+					// Go to next question after delay
+					setTimeout(() => {
+						goToNextQuestion();
+					}, 300);
+				});
+			});
+
+			// Handle multi-select options (Q3)
+			const multiSelectOptions = document.querySelector('.multi-select');
+			if (multiSelectOptions) {
+				const nextBtn = multiSelectOptions.parentElement?.querySelector('.next-btn') as HTMLButtonElement;
+
+				multiSelectOptions.querySelectorAll('.option-btn').forEach(btn => {
+					btn.addEventListener('click', (e) => {
+						const target = e.currentTarget as HTMLButtonElement;
+						const value = target.dataset.value || '';
+
+						if (value === 'none') {
+							// Deselect all others
+							multiSelectOptions.querySelectorAll('.option-btn').forEach(b => {
+								b.classList.remove('selected');
+							});
+							target.classList.add('selected');
+						} else {
+							// Deselect "none" if selected
+							multiSelectOptions.querySelector('[data-value="none"]')?.classList.remove('selected');
+							target.classList.toggle('selected');
+						}
+
+						// Show next button if any selected
+						const hasSelection = multiSelectOptions.querySelector('.selected');
+						if (nextBtn) {
+							nextBtn.style.display = hasSelection ? 'block' : 'none';
+						}
+					});
+				});
+
+				// Handle next button for multi-select
+				nextBtn?.addEventListener('click', () => {
+					const selected = multiSelectOptions.querySelectorAll('.selected');
+					const values: string[] = [];
+					let score = 0;
+
+					selected.forEach(btn => {
+						values.push((btn as HTMLButtonElement).dataset.value || '');
+						score += parseInt((btn as HTMLButtonElement).dataset.score || '0');
+					});
+
+					answers['q3'] = values;
+					totalScore += score;
+					goToNextQuestion();
+				});
+			}
+
+			function goToNextQuestion() {
+				if (currentQuestion < 7) {
+					slides[currentQuestion - 1].style.display = 'none';
+					currentQuestion++;
+					slides[currentQuestion - 1].style.display = 'block';
+				} else {
+					// Show email capture
+					slides[currentQuestion - 1].style.display = 'none';
+					if (emailCapture) {
+						emailCapture.style.display = 'block';
+					}
+				}
+			}
+
+			// Handle email form submission
+			emailForm?.addEventListener('submit', (e) => {
+				e.preventDefault();
+				const emailInput = document.getElementById('email-input') as HTMLInputElement;
+				const email = emailInput.value;
+
+				// Calculate metabolic age
+				let baseAge = 40;
+				if (userAge === '30-40') baseAge = 35;
+				else if (userAge === '40-50') baseAge = 45;
+				else if (userAge === '50-60') baseAge = 55;
+				else if (userAge === '60+') baseAge = 65;
+
+				const metabolicAge = baseAge + Math.floor(totalScore / 5);
+
+				// Store data and redirect to results
+				const resultData = {
+					email,
+					metabolicAge,
+					actualAge: baseAge,
+					totalScore,
+					mainConcern,
+					answers
+				};
+
+				// Store in sessionStorage for results page
+				sessionStorage.setItem('quizResult', JSON.stringify(resultData));
+
+				// Redirect to results page
+				window.location.href = '/quiz/result';
+			});
+		</script>
+	</body>
+</html>
