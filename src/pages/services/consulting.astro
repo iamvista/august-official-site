@@ -8,10 +8,10 @@ import { SITE_TITLE } from '../../consts';
 <!doctype html>
 <html lang="zh-Hant">
 	<head>
-		<BaseHead title={`AI 賦能顧問服務 - ${SITE_TITLE}`} description="協助企業與個人導入 AI 工作流，提升生產力產值。" />
+		<BaseHead title={`代謝財富教練系統 - ${SITE_TITLE}`} description="協助你掌握代謝靈活性，逆轉三高與慢性疲勞。" />
 		<style>
             .lp-hero {
-                background: var(--gray-light);
+                background: var(--bg-warm); /* Use warm bg */
                 color: var(--black);
                 padding: 6rem 1rem;
                 text-align: center;
@@ -29,11 +29,32 @@ import { SITE_TITLE } from '../../consts';
                 text-decoration: none;
                 transition: all 0.2s;
                 border: 2px solid var(--accent);
+                border-radius: var(--border-radius);
             }
-            .cta-btn:hover { 
-                background: white; 
-                color: var(--accent);
+            .cta-btn:hover {
+                background: var(--accent-dark);
+                border-color: var(--accent-dark);
                 transform: translateY(-2px);
+            }
+            .cta-btn.secondary {
+                background: transparent;
+                color: var(--accent);
+            }
+            .cta-btn.secondary:hover {
+                background: var(--accent);
+                color: white;
+            }
+            .cta-group {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            @media (min-width: 480px) {
+                .cta-group {
+                    flex-direction: row;
+                    justify-content: center;
+                }
             }
 
             .section { padding: 5rem 1rem; max-width: 960px; margin: 0 auto; }
@@ -47,7 +68,7 @@ import { SITE_TITLE } from '../../consts';
             .feature-card {
                 padding: 2rem;
                 border: 1px solid #ccc;
-                border-top: 4px solid var(--accent);
+                border-top: 4px solid var(--health-green);
                 background: white;
                 box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             }
@@ -81,58 +102,62 @@ import { SITE_TITLE } from '../../consts';
 		<Header />
 		<main style="padding: 0; width: 100%; max-width: 100%;">
             <section class="lp-hero">
-                <h1>AI 不會取代你，<br/>但善用 AI 的人會</h1>
-                <p>別再把 ChatGPT 當成單純的聊天機器人。我協助你建立完整的「AI 協作系統」，讓 AI 成為你最強的數位分身。</p>
-                <a href="https://cal.com/vista" target="_blank" class="cta-btn">預約企業 / 個人診斷</a>
+                <h1>不要讓你的成就，<br/>被失控的代謝拖垮</h1>
+                <p>三高、脂肪肝、慢性疲勞...這些不是老化的正常現象，而是身體發出的求救訊號。
+                我將用生物醫學的科學方法，協助你找回身體的「代謝主控權」。</p>
+                <a href="/booking" class="cta-btn">預約免費代謝健康評估</a>
             </section>
 
             <section class="section">
-                <h2 class="section-title">三大核心服務</h2>
+                <h2 class="section-title">代謝財富教練系統</h2>
                 <div class="feature-grid">
                     <div class="feature-card">
-                        <h3>🔍 AI 工作流診斷</h3>
-                        <p>深入拆解你的工作流程 (SOP)，找出最適合 AI 介入的自動化斷點。不為了用而用，而是為了解決效率瓶頸。</p>
+                        <h3>🧪 科學化數據解讀</h3>
+                        <p>不再盲目嘗試偏方。我們從健檢報告與 CGM (連續血糖監測) 數據出發，精準找出你的代謝破口。</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🛠 提示工程 (Prompt) 優化</h3>
-                        <p>建立專屬於你的 Prompt Library。從簡單的指令到複雜的 Chain-of-Thought (思維鏈)，讓 AI 產出專家級的品質。</p>
+                        <h3>🥑 低碳與斷食策略</h3>
+                        <p>建立適合你生活型態的「間歇性斷食」與「低碳飲食」計畫。不需挨餓，也能讓身體切換回燃脂模式。</p>
                     </div>
                     <div class="feature-card">
-                        <h3>🏢 企業 AI 導入顧問</h3>
-                        <p>協助組織建立內部 AI 使用規範，舉辦實戰工作坊，讓團隊從抗拒 AI 轉變為擁抱 AI。</p>
+                        <h3>🏃 Zone 2 科學運動</h3>
+                        <p>不需要把自己練到力竭。透過 Zone 2 超慢跑與肌力訓練，以最有效率的方式提升線粒體功能。</p>
                     </div>
                 </div>
             </section>
 
             <section class="section" style="background:var(--gray-light);">
-                <h2 class="section-title">導入流程</h2>
+                <h2 class="section-title">90 天轉變計畫</h2>
                 <div class="workflow-step">
                     <div class="step-number">1</div>
                     <div>
-                        <h3>需求訪談與盤點</h3>
-                        <p>了解目前的痛點、使用的工具堆疊 (Tech Stack)，以及希望達成的目標。</p>
+                        <h3>第一階段：覺察與歸零</h3>
+                        <p>透過數據盤點身體現況，找出發炎源頭。進行為期 2 週的排除飲食 (Elimination Diet)，讓腸道與代謝系統休息。</p>
                     </div>
                 </div>
                 <div class="workflow-step">
                     <div class="step-number">2</div>
                     <div>
-                        <h3>解決方案設計</h3>
-                        <p>規劃適合的 AI 工具組合 (ChatGPT, Claude, Notion AI, Zapier 等) 與自動化流程。</p>
+                        <h3>第二階段：重建代謝靈活性</h3>
+                        <p>導入 168 斷食與低碳飲食。訓練身體重新學會燃燒脂肪，擺脫對糖分的依賴，解決餐後嗜睡問題。</p>
                     </div>
                 </div>
                 <div class="workflow-step">
                     <div class="step-number">3</div>
                     <div>
-                        <h3>培訓與落地實作</h3>
-                        <p>透過工作坊形式帶領團隊實操作業，並建立檢核機制，確保新流程能真正落地。</p>
+                        <h3>第三階段：原子習慣固化</h3>
+                        <p>將飲食與運動融入日常，建立「不費力」的健康自動導航系統。讓健康成為你財富增長的基石。</p>
                     </div>
                 </div>
             </section>
 
              <section class="section" style="text-align: center;">
-                <h2 class="section-title">準備好升級你的生產力了嗎？</h2>
-                <p style="margin-bottom: 2rem; font-size: 1.2rem;">立即預約 30 分鐘免費諮詢，讓我們聊聊你的需求。</p>
-                <a href="https://cal.com/vista" target="_blank" class="cta-btn">立即預約諮詢</a>
+                <h2 class="section-title">你的健康資產，值得最好的投資</h2>
+                <p style="margin-bottom: 2rem; font-size: 1.2rem;">每天 15 分鐘的投入，換來未來 30 年的自由。<br/>立即預約 30 分鐘免費諮詢，讓我們聊聊你的健康目標。</p>
+                <div class="cta-group">
+                    <a href="/booking" class="cta-btn">填寫預約表單，申請免費諮詢</a>
+                    <a href="/quiz" class="cta-btn secondary">還沒準備好？先做代謝年齡測驗 →</a>
+                </div>
             </section>
 		</main>
 		<Footer />
