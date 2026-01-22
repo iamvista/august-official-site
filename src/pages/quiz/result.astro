@@ -341,13 +341,13 @@ import { SITE_TITLE } from '../../consts';
 		</style>
 
 		<script>
-			// Video recommendations based on concern
+			// Video recommendations based on concern (YouTube Shorts)
 			const videoRecommendations: Record<string, string> = {
-				weight: 'VIDEO_ID_WEIGHT',
-				fatigue: 'VIDEO_ID_FATIGUE',
-				metabolic: 'VIDEO_ID_METABOLIC',
-				sleep: 'VIDEO_ID_SLEEP',
-				other: 'VIDEO_ID_DEFAULT'
+				weight: 'c94gPh3QRdE',
+				fatigue: '4B2Fj36uWJI',
+				metabolic: 'mnBuviTSD5Y',
+				sleep: '4B2Fj36uWJI',
+				other: 'c94gPh3QRdE'
 			};
 
 			// Risk messages based on score ranges
@@ -428,9 +428,9 @@ import { SITE_TITLE } from '../../consts';
 					const risks = riskMessages[riskLevel];
 					riskListEl.innerHTML = risks.map(r => `<li>${r}</li>`).join('');
 
-					// Set recommended video
+					// Set recommended video (YouTube Shorts use /shorts/ path)
 					const videoId = videoRecommendations[resultData.mainConcern] || videoRecommendations.other;
-					videoEl.src = `https://www.youtube.com/embed/${videoId}`;
+					videoEl.src = `https://www.youtube.com/embed/${videoId}?loop=1`;
 
 				}, 1500);
 			});
